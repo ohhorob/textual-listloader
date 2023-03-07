@@ -2,6 +2,7 @@ from typing import Type
 
 from textual.app import App, CSSPathType
 from textual.driver import Driver
+from textual.events import Mount
 
 from screen.main import Main
 
@@ -24,7 +25,6 @@ class LoaderApp(App[str]):
             import pydevd_pycharm
             pydevd_pycharm.settrace('localhost', port=2223, suspend=False)
 
-    def on_mount(self) -> None:
+    def on_mount(self, event: Mount) -> None:
+        """App is mounted. Start the Main screen to get things rolling"""
         self.push_screen("main")
-        # action doesn't appear to be triggered from here
-        # self.get_screen("main").action("loadvalues")
